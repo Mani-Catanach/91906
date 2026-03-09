@@ -16,41 +16,41 @@ class Converter:
         self.all_calculations_list = []
 
 
-        self.temp_frame = Frame(padx=10, pady=10)
-        self.temp_frame.grid()
+        self.leng_frame = Frame(padx=10, pady=10)
+        self.leng_frame.grid()
 
-        self.temp_heading = Label(self.temp_frame,
+        self.leng_heading = Label(self.leng_frame,
                                   text="Length Convertor",
                                   font=("Arial", 16, "bold")
                                   )
-        self.temp_heading.grid(row=0)
+        self.leng_heading.grid(row=0)
 
         instructions = ("Please enter a length below and press one of the buttons"
-                        "to convert it to degrees C or degrees F")
-        self.temp_instructions = Label(self.temp_frame,
+                        "to convert it to m or  cm")
+        self.leng_instructions = Label(self.leng_frame,
                                        text=instructions,
                                        wraplength=250, width=40,
                                        justify="left")
-        self.temp_instructions.grid(row=1)
+        self.leng_instructions.grid(row=1)
 
-        self.temp_entry = Entry(self.temp_frame,
+        self.leng_entry = Entry(self.leng_frame,
                                 font=("Arial", 14)
                                 )
-        self.temp_entry.grid(row=2, padx=10, pady=10)
+        self.leng_entry.grid(row=2, padx=10, pady=10)
 
         error = "Please enter a number"
-        self.answer_error = Label(self.temp_frame, text=error,
+        self.answer_error = Label(self.leng_frame, text=error,
                                   fg="#004C99")
         self.answer_error.grid(row=3)
 
         # Conversion, help and history / export buttons
-        self.button_frame = Frame(self.temp_frame)
+        self.button_frame = Frame(self.leng_frame)
         self.button_frame.grid(row=4)
 
         # button list ( button text | bg colour | command | row | column)
         button_details_list = [
-            ["To Metres", "#990099", lambda:self.check_temp(c.UNIT_CENTIMETRES), 0, 0],
-            ["To Centimetres", "#009900", lambda:self.check_temp(c.UNIT_METRES), 0, 1],
+            ["To Metres", "#990099", lambda:self.check_leng(c.UNIT_CENTIMETRES), 0, 0],
+            ["To Centimetres", "#009900", lambda:self.check_leng(c.UNIT_METRES), 0, 1],
             ["Help / Info", "#CC6600", self.to_help, 1, 0],
             ["History / Export", "#004C99", "", 1, 1],
         ]
@@ -76,25 +76,25 @@ class Converter:
 
 
 
-    def check_temp(self, min_temp):
+    def check_leng(self, min_leng):
         """
         Checks length is valid and either invokes calculation
         function or shows a custom error
         """
 
         # Retrieve length to be converted
-        to_convert = self.temp_entry.get()
+        to_convert = self.leng_entry.get()
 
         # Reset label and entry box (if we had an error
         self.answer_error.config(fg="#004C99")
-        self.temp_entry.config(bg="#FFFFFF")
+        self.leng_entry.config(bg="#FFFFFF")
 
         # check that amount to be converted is a number above absolute zero
         try:
             to_convert = float(to_convert)
             if to_convert >= 0:
                 error = ""
-                self.convert(min_temp, to_convert)
+                self.convert(min_leng, to_convert)
             else:
                 error = "Too low"
 
@@ -104,16 +104,16 @@ class Converter:
         # display error if necessary
         if error != "":
             self.answer_error.config(text=error, fg="#9C0000")
-            self.temp_entry.config(bg="#F4CCCC")
-            self.temp_entry.delete(0, END)
+            self.leng_entry.config(bg="#F4CCCC")
+            self.leng_entry.delete(0, END)
 
-    def convert(self, min_temp, to_convert):
+    def convert(self, min_leng, to_convert):
         """
         Converts length and updates answer level. Also stores
         calculation for Export/History feature
         """
 
-        if min_temp == c.UNIT_CENTIMETRES:
+        if min_leng == c.UNIT_CENTIMETRES:
             answer = cr.to_centimetres(to_convert)
             answer_statement = f"{to_convert} m is {answer} cm"
         else:
@@ -161,12 +161,11 @@ class DisplayHelp:
 
         help_text = ("To use the program, simply enter the length"
                      "you wish to convert and then choose to convert to "
-                     "either degrees Metres (centigrade) or "
-                     "Centimetres... \n\n"
-                     "Note that -273 degrees C "
-                     "(-459 F) is absolute zero (the coldest possible"
-                     "length). If you try to convert a"
-                     "length that is less than -273 degrees C,"
+                     "either metres or "
+                     "centimetres... \n\n"
+                     "Note that 0 is the minimum length for both"
+                     "m and cm. If you try to convert a"
+                     "length that is less than 0,"
                      "you will get an error message. \n\n "
                      "To see your "
                      "calculation history and export it to a text "

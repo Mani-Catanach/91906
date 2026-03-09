@@ -169,12 +169,11 @@ class DisplayHelp:
 
         help_text = ("To use the program, simply enter the length"
                      "you wish to convert and then choose to convert to "
-                     "either degrees Metres (centigrade) or "
-                     "Centimetres... \n\n"
-                     "Note that -273 degrees C "
-                     "(-459 F) is absolute zero (the coldest possible"
-                     "length). If you try to convert a"
-                     "length that is less than -273 degrees C,"
+                     "either metres or "
+                     "centimetres... \n\n"
+                     "Note that 0 is the minimum length for both"
+                     "m and cm. If you try to convert a"
+                     "length that is less than 0,"
                      "you will get an error message. \n\n "
                      "To see your "
                      "calculation history and export it to a text "
@@ -191,7 +190,7 @@ class DisplayHelp:
                                      fg="#FFFFFF", command=partial(self.close_help, partner))
         self.dismiss_button.grid(row=2, padx=10, pady=10)
 
-        # List and kloop to set background colour on
+        # List and loop to set background colour on
         # everything except the buttons.
         recolour_list = [self.help_frame, self.help_heading_label,
                          self.help_text_label]
@@ -329,7 +328,7 @@ class DisplayHistory:
             text_file.write(f"Generated: {day}/{month}/{year}\n\n")
             text_file.write("Here is your calculation history (oldes to newest)... \n")
 
-            # write theitem to file
+            # write the item to file
             for item in calculations_list:
                 text_file.write(item)
                 text_file.write("\n")

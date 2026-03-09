@@ -1,6 +1,5 @@
 from tkinter import *
 import all_constants as c
-import conversion_rounding as cr
 
 class Converter:
     """
@@ -12,8 +11,6 @@ class Converter:
         Length converter GUI
         """
 
-        self.all_calculations_list = []
-
         self.leng_frame = Frame(padx=10, pady=10)
         self.leng_frame.grid()
 
@@ -23,7 +20,7 @@ class Converter:
                                   )
         self.leng_heading.grid(row=0)
 
-        instructions = ("Please enter a Length below and press one of the buttons"
+        instructions = ("Please enter a length below and press one of the buttons"
                         "to convert it to degrees C or degrees F")
         self.leng_instructions = Label(self.leng_frame,
                                        text=instructions,
@@ -59,33 +56,32 @@ class Converter:
         for item in button_details_list:
             self.make_button = Button(self.button_frame,
                                       text=item[0], bg=item[1],
-                                      fg="#000000", font=("Arial", 12, "bold"),
+                                      fg="#FFFFFF", font=("Arial", 12, "bold"),
                                       width=12, command=item[2])
             self.make_button.grid(row=item[3], column=item[4], padx=5, pady=5)
 
             self.button_ref_list.append(self.make_button)
 
         # retrieve 'history / export' button and disable it at the start
-        self.to_history_button = self.button_ref_list[3]
-        self.to_history_button.config(state=DISABLED)
+        self.to_history_button = self.button_ref_list[3].config(state=DISABLED)
 
     def check_leng(self, unit_leng):
         """
-        Checks Length is valid and either invokes calculation
+        Checks length is valid and either invokes calculation
         function or shows a custom error
         """
 
-        # Retrieve Length to be converted
+        # Retrieve length to be converted
         to_convert = self.leng_entry.get()
 
         # Reset label and entry box (if we had an error
         self.answer_error.config(fg="#004C99")
-        self.leng_entry.config(bg="#FFFFFF")
+        self.leng_entry.config(fg="#FFFFFF")
 
         # check that amount to be converted is a number above absolute zero
         try:
             to_convert = float(to_convert)
-            if to_convert >= unit_leng:
+            if to_convert >= 0:
                 error = ""
                 self.convert(unit_leng, to_convert)
             else:
@@ -98,27 +94,17 @@ class Converter:
         if error != "":
             self.answer_error.config(text=error, fg="#9C0000")
             self.leng_entry.config(bg="#F4CCCC")
-            self.leng_entry.delete(0, END)
 
     def convert(self, unit_leng, to_convert):
         """
-        Converts Length and updates answer level. Also stores
+        Converts length and updates answer level. Also stores
         calculation for Export/History feature
         """
 
         if unit_leng == c.UNIT_METRES:
-            answer = cr.to_centimetres(to_convert)
-            answer_statement = f"{to_convert} m is {answer} cm"
+            self.answer_error.config(text=f"Converting {to_convert} C to F")
         else:
-            answer = cr.to_metres(to_convert)
-            answer_statement = f"{to_convert} cm is {answer} m"
-
-        # enable history export button as soon as we have a valid calculation
-        self.to_history_button.config(state=NORMAL)
-
-        self.answer_error.config(text=answer_statement)
-        self.all_calculations_list.append(answer_statement)
-        print(self.all_calculations_list)
+            self.answer_error.config(text=f"Converting {to_convert} F to C")
 
 
 # main routine

@@ -3,18 +3,18 @@ from functools import partial # To prevent unwanted windows
 
 class Converter:
     """
-    Temperature conversion tool (deg C to deg F or deg F to deg C)
+    Length conversion tool (m to cm or cm to m)
     """
 
     def __init__(self):
         """
-        Temperature converter GUI
+        Length converter GUI
         """
 
-        self.temp_frame = Frame(padx=10, pady=10)
-        self.temp_frame.grid()
+        self.leng_frame = Frame(padx=10, pady=10)
+        self.leng_frame.grid()
 
-        self.to_history_button = Button(self.temp_frame,
+        self.to_history_button = Button(self.leng_frame,
                                      text="History / Export",
                                      bg="#004C99",
                                      fg="#FFFFFF",
@@ -120,6 +120,6 @@ class DisplayHistory:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Temperature Conversion")
+    root.title("Length Conversion")
     Converter()
     root.mainloop()

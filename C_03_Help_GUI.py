@@ -3,18 +3,18 @@ from functools import partial # To prevent unwanted windows
 
 class Converter:
     """
-    Temperature conversion tool (deg C to deg F or deg F to deg C)
+    Length conversion tool (m to cm or cm to m)
     """
 
     def __init__(self):
         """
-        Temperature converter GUI
+        Length converter GUI
         """
 
-        self.temp_frame = Frame(padx=10, pady=10)
-        self.temp_frame.grid()
+        self.leng_frame = Frame(padx=10, pady=10)
+        self.leng_frame.grid()
 
-        self.to_help_button = Button(self.temp_frame,
+        self.to_help_button = Button(self.leng_frame,
                                      text="Help / Info",
                                      bg="#CC6600",
                                      fg="#FFFFFF",
@@ -53,14 +53,13 @@ class DisplayHelp:
                                       font=("Arial", 14, "bold"),)
         self.help_heading_label.grid(row=0)
 
-        help_text = ("To use the program, simply enter the temperature"
+        help_text = ("To use the program, simply enter the length"
                      "you wish to convert and then choose to convert to "
-                     "either degrees Celsius (centigrade) or "
-                     "Fahrenheit... \n\n"
-                     "Note that -273 degrees C "
-                     "(-459 F) is absolute zero (the coldest possible"
-                     "temperature). If you try to convert a"
-                     "temperature that is less than -273 degrees C,"
+                     "either metres or "
+                     "centimetres... \n\n"
+                     "Note that 0 is the minimum length for both"
+                     "m and cm. If you try to convert a"
+                     "length that is less than 0,"
                      "you will get an error message. \n\n "
                      "To see your "
                      "calculation history and export it to a text "
@@ -97,6 +96,6 @@ class DisplayHelp:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Temperature Conversion")
+    root.title("Length Conversion")
     Converter()
     root.mainloop()

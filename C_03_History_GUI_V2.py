@@ -4,22 +4,20 @@ import all_constants as c
 
 class Converter:
     """
-    Temperature conversion tool (deg C to deg F or deg F to deg C)
+    Length conversion tool (m to cm or cm to m)
     """
 
     def __init__(self):
         """
-        Temperature converter GUI
+        Length converter GUI
         """
-        self.all_calculations_list = ['10.0 deg F is -12 deg C', '20.0 deg F is -7 deg C',
-                                     '30.0 deg F is -1 deg C', '40.0 deg F is 4 deg C',
-                                     '50.0 deg F is 10 deg C', '60.0 deg F is 16 deg C']
+        self.all_calculations_list = []
 
 
-        self.temp_frame = Frame(padx=10, pady=10)
-        self.temp_frame.grid()
+        self.leng_frame = Frame(padx=10, pady=10)
+        self.leng_frame.grid()
 
-        self.to_history_button = Button(self.temp_frame,
+        self.to_history_button = Button(self.leng_frame,
                                      text="History / Export",
                                      bg="#004C99",
                                      fg="#FFFFFF",
@@ -145,6 +143,6 @@ class DisplayHistory:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Temperature Conversion")
+    root.title("Length Conversion")
     Converter()
     root.mainloop()
