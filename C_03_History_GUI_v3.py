@@ -12,7 +12,10 @@ class Converter:
         """
         Length converter GUI
         """
-        self.all_calculations_list = []
+        self.all_calculations_list = ['5.0 cm is 0.0500 m', '555.0 cm is 5.5500 m',
+                                      '5.55 cm is 0.0555 m', '5.55 m is 555.0000 cm',
+                                      '555.0 m is 55500.0000 cm', '555.0 cm is 5.5500 m']
+
 
 
         self.leng_frame = Frame(padx=10, pady=10)
@@ -62,7 +65,7 @@ class DisplayHistory:
 
         #strings for long labels
         recent_intro_txt = (f"Below are {calc_amount} calculations."
-                     " All calculations are shown to the nearest degree.")
+                     " All calculations are shown to the nearest 3dp.")
 
         # create string from calculations list (newest calculations first)
         newest_first_string = ""
@@ -152,7 +155,7 @@ class DisplayHistory:
         with open(write_to, "w") as text_file:
             text_file.write(" Length Calculations \n")
             text_file.write(f"Generated: {day}/{month}/{year}\n\n")
-            text_file.write("Here is your calculation history (oldes to newest)... \n")
+            text_file.write("Here is your calculation history (oldest to newest)... \n")
 
             # write the item to file
             for item in calculations_list:
