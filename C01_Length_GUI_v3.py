@@ -21,7 +21,8 @@ class Converter:
         self.leng_heading.grid(row=0)
 
         instructions = ("Please enter a length below and press one of the buttons"
-                        "to convert it to degrees C or degrees F")
+                        "to convert it to m or cm")
+
         self.leng_instructions = Label(self.leng_frame,
                                        text=instructions,
                                        wraplength=250, width=40,
@@ -75,25 +76,25 @@ class Converter:
         to_convert = self.leng_entry.get()
 
         # Reset label and entry box (if we had an error
-        self.answer_error.config(fg="#004C99")
-        self.leng_entry.config(fg="#FFFFFF")
+        self.answer_error.config(fg="#004c99")
+        self.leng_entry.config(fg="#000000", bg="#ffffff")
 
         # check that amount to be converted is a number above absolute zero
         try:
             to_convert = float(to_convert)
-            if to_convert >= 0:
+            if c.MIN_LENGTH <= to_convert <= c.MAX_LENGTH:
                 error = ""
                 self.convert(unit_leng, to_convert)
             else:
-                error = "Too low"
+                error = f"Please enter a number between {c.MIN_LENGTH} and {c.MAX_LENGTH} (inclusive)"
 
         except ValueError:
             error = "Please enter a number"
 
         # display error if necessary
         if error != "":
-            self.answer_error.config(text=error, fg="#9C0000")
-            self.leng_entry.config(bg="#F4CCCC")
+            self.answer_error.config(text=error, fg="#9c0000")
+            self.leng_entry.config(bg="#f4cccc")
 
     def convert(self, unit_leng, to_convert):
         """
@@ -102,9 +103,9 @@ class Converter:
         """
 
         if unit_leng == c.UNIT_METRES:
-            self.answer_error.config(text=f"Converting {to_convert} C to F")
+            self.answer_error.config(text=f"Converting {to_convert} m to cm")
         else:
-            self.answer_error.config(text=f"Converting {to_convert} F to C")
+            self.answer_error.config(text=f"Converting {to_convert} cm to m")
 
 
 # main routine
