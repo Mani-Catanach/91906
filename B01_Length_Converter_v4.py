@@ -52,10 +52,10 @@ class Converter:
 
         # button list ( button text | bg colour | command | row | column)
         button_details_list = [
-            ["To Metres", "#FE00C4", lambda:self.check_leng(c.UNIT_METRES), 0, 0],
-            ["To Centimetres", "#BC88AC", lambda:self.check_leng(c.UNIT_CENTIMETRES), 0, 1],
-            ["Help / Info", "#d8b8ca", self.to_help, 1, 0],
-            ["History / Export", "#AE0062", self.to_history, 1, 1],
+            ["To Metres", "#012345", lambda:self.check_leng(c.UNIT_METRES), 0, 0],
+            ["To Centimetres", "#123456", lambda:self.check_leng(c.UNIT_CENTIMETRES), 0, 1],
+            ["Help / Info", "#234567", self.to_help, 1, 0],
+            ["History / Export", "#345678", self.to_history, 1, 1],
         ]
 
         # List to hold button once they have been made
@@ -64,7 +64,7 @@ class Converter:
         for item in button_details_list:
             self.make_button = Button(self.button_frame,
                                       text=item[0], bg=item[1],
-                                      fg="#000000", font=("Arial", 12, "bold"),
+                                      fg="#ffffff", font=("Arial", 12, "bold"),
                                       width=12, command=item[2])
             self.make_button.grid(row=item[3], column=item[4], padx=5, pady=5)
 
@@ -89,7 +89,7 @@ class Converter:
 
         # Reset label and entry box (if we had an error
         self.answer_error.config(fg="#004C99")
-        self.leng_entry.config(bg="#FFFFFF")
+        self.leng_entry.config(bg="#ffffff")
 
         # check if there is a max length (i.e. max length !=0) and then check if input is between min and max length
         # or greater than min length depending on if there is a max length
@@ -115,7 +115,7 @@ class Converter:
         # display error if necessary
         if error != "":
             self.answer_error.config(text=error, fg="#9C0000")
-            self.leng_entry.config(bg="#F4CCCC")
+            self.leng_entry.config(bg="#f4cccc")
             self.leng_entry.delete(0, END)
 
     def convert(self, unit_leng, to_convert):
@@ -156,7 +156,7 @@ class DisplayHelp:
 
     def __init__(self, partner):
         # setup dialogue box and background colour
-        background = "#ffe6cc"
+        background = "#456789"
         self.help_box = Toplevel()
 
         # diable help button
@@ -172,7 +172,7 @@ class DisplayHelp:
         self.help_frame.grid()
 
         self.help_heading_label = Label(self.help_frame,
-                                     text="Help / Info",
+                                     text="Help / Info", fg="#ffffff",
                                       font=("Arial", 14, "bold"),)
         self.help_heading_label.grid(row=0)
 
@@ -198,14 +198,14 @@ class DisplayHelp:
                      "file, please click the History / Export button")
 
         self.help_text_label = Label(self.help_frame,
-                                     text=help_text, wraplength=350,
+                                     fg="#ffffff", text=help_text, wraplength=350,
                                      justify="left")
         self.help_text_label.grid(row=1, padx=5, pady=5)
 
         self.dismiss_button = Button(self.help_frame,
                                      font=("Arial", 12, "bold"),
-                                     text="Dismiss", bg="#CC6600",
-                                     fg="#FFFFFF", command=partial(self.close_help, partner))
+                                     text="Dismiss", bg="#56789a",
+                                     fg="#ffffff", command=partial(self.close_help, partner))
         self.dismiss_button.grid(row=2, padx=10, pady=10)
 
         # List and loop to set background colour on
@@ -244,10 +244,10 @@ class DisplayHistory:
 
         # background colour and text for calculation area
         if len(calculations_list) <= c.MAX_CALCS:
-            calc_back = "#D5E8D4"
+            calc_back = "#3e58a3"
             calc_amount = "all your"
         else:
-            calc_back = "#ffe6cc"
+            calc_back = "#3e58a3"
             calc_amount = (f"your recent calculations -"
                            f"showing {c.MAX_CALCS} / {len(calculations_list)}")
 
@@ -317,7 +317,7 @@ class DisplayHistory:
         for btn in button_details_list:
             self.make_button = Button(self.button_frame,
                                       text=btn[0], bg=btn[1],
-                                      fg="#000000", font=("Arial", 12, "bold"),
+                                      fg="#ffffff", font=("Arial", 12, "bold"),
                                       width=12, command=btn[2])
             self.make_button.grid(row=btn[3], column=btn[4], padx=10, pady=10)
 
