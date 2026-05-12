@@ -21,7 +21,7 @@ class Converter:
         self.leng_heading.grid(row=0)
 
         instructions = ("Please enter a length below and press one of the buttons"
-                        "to convert it to m or cm")
+                        "to convert it to metres (m) or centimetres (cm)")
 
         self.leng_instructions = Label(self.leng_frame,
                                        text=instructions,
