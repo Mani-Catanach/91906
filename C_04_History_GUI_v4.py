@@ -154,7 +154,7 @@ class DisplayHistory:
 
         # If user cancels dialog, make file_path empty string
         if not write_to:
-            self.export_filename_label.config(bg="#F4CCCC",
+            self.export_filename_label.config(bg="#f4cccc",
                                               text="Export cancelled.")
             return
 
@@ -175,16 +175,8 @@ class DisplayHistory:
 
         # tell user if export failed
         except Exception as e:
-            self.export_filename_label.config(bg="#F4CCCC",
+            self.export_filename_label.config(bg="#f4cccc",
                                               text=f"Export failed: {e}")
-
-    def close_history(self, partner):
-        """
-        Closes history dialogue box and enables history button
-        """
-        # Put history button back to normal
-        partner.to_history_button.config(state=NORMAL)
-        self.history_box.destroy()
 
     def close_history(self, partner):
         """
