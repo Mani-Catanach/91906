@@ -194,7 +194,7 @@ class DisplayHelp:
                      f"{help_bounds}"
                      "you will get an error message. \n\n "
                       "You can input a number with almost as many decimal "
-                     "places as you like, but the output is rounded to 3"
+                     "places as you like, but the output is rounded to 4"
                      " decimal places so some information may be lost if "
                      " your input has too many decimal places. \n\n"
                      "To see your "
