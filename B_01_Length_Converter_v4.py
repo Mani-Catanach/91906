@@ -94,20 +94,24 @@ class Converter:
         # check if there is a max length (i.e. max length !=0) and then check if input is between min and max length
         # or greater than min length depending on if there is a max length
         try:
-            to_convert = float(to_convert)
-
-            if c.MAX_LENGTH != 0:
-                if c.MIN_LENGTH <= to_convert <= c.MAX_LENGTH:
-                    error = ""
-                    self.convert(unit_leng, to_convert)
-                else:
-                    error = f"Please enter a number between {c.MIN_LENGTH} and {c.MAX_LENGTH} (inclusive)"
+            # make sure string != -0
+            if to_convert == "-0":
+                error = "-0 is invalid, if you want to enter 0, type 0"
             else:
-                if c.MIN_LENGTH <= to_convert:
-                    error = ""
-                    self.convert(unit_leng, to_convert)
+                to_convert = float(to_convert)
+
+                if c.MAX_LENGTH != 0:
+                    if c.MIN_LENGTH <= to_convert <= c.MAX_LENGTH:
+                        error = ""
+                        self.convert(unit_leng, to_convert)
+                    else:
+                        error = f"Please enter a number between {c.MIN_LENGTH} and {c.MAX_LENGTH} (inclusive)"
                 else:
-                    error = f"Please enter a number greater than or equal to {c.MIN_LENGTH}"
+                    if c.MIN_LENGTH <= to_convert:
+                        error = ""
+                        self.convert(unit_leng, to_convert)
+                    else:
+                        error = f"Please enter a number greater than or equal to {c.MIN_LENGTH}"
 
         except ValueError:
             error = "Please enter a number"
@@ -193,8 +197,8 @@ class DisplayHelp:
                      "centimetres... \n\n"
                      f"{help_bounds}"
                      "you will get an error message. \n\n "
-                      "You can input a number with almost as many decimal "
-                     "places as you like, but the output is rounded to 4"
+                     "You can input a number with almost as many decimal "
+                     "places as you like, but the output is rounded to 3"
                      " decimal places so some information may be lost if "
                      " your input has too many decimal places. \n\n"
                      "To see your "
