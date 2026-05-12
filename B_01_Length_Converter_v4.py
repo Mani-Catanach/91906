@@ -343,8 +343,7 @@ class DisplayHistory:
         # ask user for file save location
         file_path = filedialog.asksaveasfilename(
             defaultextension=".txt",
-            initialfile=file_name,
-            filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
+            initialfile=file_name
         )
 
         # make file path an empty string if user cancels data
@@ -353,23 +352,28 @@ class DisplayHistory:
                                               text="Export cancelled.")
             return
 
-        # edit label so users know that their export is done
-        success_string = ("Export Successful, The file is called "
-                          f"{file_name}.txt")
-        self.export_filename_label.config(bg="#009900", text=success_string)
-
         # write data to text file
         write_to = f"{file_name}.txt"
 
-        with open(write_to, "w") as text_file:
-            text_file.write(" Length Calculations \n")
-            text_file.write(f"Generated: {day}/{month}/{year}\n\n")
-            text_file.write("Here is your calculation history (oldest to newest)... \n")
+        try:
+            with open(write_to, "w") as text_file:
+                text_file.write("Length Calculations\n")
+                text_file.write(f"Generated: {day}/{month}/{year}\n\n")
+                text_file.write("Here is your calculation history (oldest to newest)...\n")
 
-            # write the item to file
-            for item in calculations_list:
-                text_file.write(item)
-                text_file.write("\n")
+                # write to destination
+                for item in calculations_list:
+                    text_file.write(item)
+                    text_file.write("\n")
+
+            # Show success message with just the filename (not full path)
+            filename_only = file_path.split("/")[-1]  # works on Windows with \\ too
+            success_string = f"Export Successful! File saved as {filename_only}"
+            self.export_filename_label.config(bg="#009900", text=success_string)
+
+        except Exception as e:
+            self.export_filename_label.config(bg="#F4CCCC",
+                                              text=f"Export failed: {e}")
 
     def close_history(self, partner):
         """
