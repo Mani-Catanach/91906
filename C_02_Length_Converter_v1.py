@@ -24,7 +24,7 @@ class Converter:
         self.leng_heading.grid(row=0)
 
         instructions = ("Please enter a Length below and press one of the buttons"
-                        " to convert it to degrees C or degrees F")
+                        " to convert it to m or cm")
         self.leng_instructions = Label(self.leng_frame,
                                        text=instructions,
                                        wraplength=250, width=40,
@@ -85,7 +85,7 @@ class Converter:
         # check that amount to be converted is a number above absolute zero
         try:
             to_convert = float(to_convert)
-            if c.MIN_LENGTH <= to_convert <= c.MAX_LENGTH:
+            if c.MIN_LENGTH < to_convert <= c.MAX_LENGTH:
                 error = ""
                 self.convert(unit_leng, to_convert)
             else:
