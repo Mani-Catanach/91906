@@ -84,12 +84,24 @@ class Converter:
 
         # check that amount to be converted is a number above absolute zero
         try:
-            to_convert = float(to_convert)
-            if c.MIN_LENGTH <= to_convert <= c.MAX_LENGTH:
-                error = ""
-                self.convert(unit_leng, to_convert)
+            # make sure user isn't inputting -0 before converting to float
+            if float(to_convert) == 0 and to_convert.strip().startswith("-"):
+                error = "-0 is invalid, if you want to enter 0, type 0"
             else:
-                error = f"Please enter a number between {c.MIN_LENGTH} and {c.MAX_LENGTH} (Inclusive)"
+                to_convert = float(to_convert)
+
+                if c.MAX_LENGTH != 0:
+                    if c.MIN_LENGTH <= to_convert <= c.MAX_LENGTH:
+                        error = ""
+                        self.convert(unit_leng, to_convert)
+                    else:
+                        error = f"Please enter a number between {c.MIN_LENGTH} and {c.MAX_LENGTH} (inclusive)"
+                else:
+                    if c.MIN_LENGTH <= to_convert:
+                        error = ""
+                        self.convert(unit_leng, to_convert)
+                    else:
+                        error = f"Please enter a number greater than or equal to {c.MIN_LENGTH}"
 
         except ValueError:
             error = "Please enter a number"

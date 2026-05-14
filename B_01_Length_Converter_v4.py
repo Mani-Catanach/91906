@@ -94,8 +94,8 @@ class Converter:
         # check if there is a max length (i.e. max length !=0) and then check if input is between min and max length
         # or greater than min length depending on if there is a max length
         try:
-            # make sure string != -0
-            if to_convert == "-0":
+            # make sure user isn't inputting -0 before converting to float
+            if float(to_convert) == 0 and to_convert.strip().startswith("-"):
                 error = "-0 is invalid, if you want to enter 0, type 0"
             else:
                 to_convert = float(to_convert)
@@ -198,7 +198,7 @@ class DisplayHelp:
                      f"{help_bounds}"
                      "you will get an error message. \n\n "
                      "You can input a number with almost as many decimal "
-                     "places as you like, but the output is rounded to 3"
+                     "places as you like, but the output is rounded to 4"
                      " decimal places so some information may be lost if "
                      " your input has too many decimal places. \n\n"
                      "To see your "
@@ -341,19 +341,16 @@ class DisplayHistory:
         file_name = f"lengths_{year}-{month}-{day}"
 
         # ask user for file save location
-        file_path = filedialog.asksaveasfilename(
+        write_to = filedialog.asksaveasfilename(
             defaultextension=".txt",
             initialfile=file_name
         )
 
         # make file path an empty string if user cancels data
-        if not file_path:
+        if not write_to:
             self.export_filename_label.config(bg="#F4CCCC",
                                               text="Export cancelled.")
             return
-
-        # write data to text file
-        write_to = f"{file_name}.txt"
 
         try:
             with open(write_to, "w") as text_file:
@@ -367,7 +364,7 @@ class DisplayHistory:
                     text_file.write("\n")
 
             # Show success message with just the filename (not full path)
-            filename_only = file_path.split("/")[-1]  # works on Windows with \\ too
+            filename_only = write_to.replace("\\", "/").split("/")[-1]
             success_string = f"Export Successful! File saved as {filename_only}"
             self.export_filename_label.config(bg="#009900", text=success_string)
 
