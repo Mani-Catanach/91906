@@ -89,7 +89,7 @@ class Converter:
                 error = ""
                 self.convert(unit_leng, to_convert)
             else:
-                error = f"Please enter a number between {c.MIN_LENGTH} and {c.MAX_LENGTH} (Inclusive)"
+                error = f"Please enter a number greater than {c.MIN_LENGTH} and less than or equal to {c.MAX_LENGTH}"
 
         except ValueError:
             error = "Please enter a number"
