@@ -14,9 +14,7 @@ class Converter:
         """
         Length converter GUI
         """
-        self.all_calculations_list = ['5.0 cm is 0.0500 m', '555.0 cm is 5.5500 m',
-                                      '5.55 cm is 0.0555 m', '5.55 m is 555.0000 cm',
-                                      '555.0 m is 55500.0000 cm', '555.0 cm is 5.5500 m']
+        self.all_calculations_list = ['5.0 cm is 0.0500 m']
 
 
 
@@ -67,7 +65,7 @@ class DisplayHistory:
 
         #strings for long labels
         recent_intro_txt = (f"Below are {calc_amount} calculations."
-                     " All calculations are shown to the nearest 3dp.")
+                     " All calculations are shown to the nearest 4dp.")
 
         # create string from calculations list (newest calculations first)
         newest_first_string = ""
@@ -149,7 +147,8 @@ class DisplayHistory:
 
         # Ask the user where to save the file
         write_to = filedialog.asksaveasfilename(
-            initialfile=file_name,
+            defaultextension=".txt",
+            initialfile=file_name
         )
 
         # If user cancels dialog, make file_path empty string

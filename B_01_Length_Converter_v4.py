@@ -201,6 +201,11 @@ class DisplayHelp:
                      "places as you like, but the output is rounded to 4"
                      " decimal places so some information may be lost if "
                      " your input has too many decimal places. \n\n"
+                     "You can use scientific notation e.g. 1.15e2 is 115, "
+                     "it does not matter if you use e or E. \n\n"
+                     "Entries of inf or nan will return a number based error message "
+                     "as opposed to a entering text based error message. -0, -0.00 etc are"
+                     " all also invalid entries and will return a unique error message. \n\n"
                      "To see your "
                      "calculation history and export it to a text "
                      "file, please click the History / Export button")
@@ -236,7 +241,6 @@ class DisplayHistory:
 
     def __init__(self, partner, calculations_list):
         # setup dialogue box and background colour
-
         self.history_box = Toplevel()
 
         # diable history button
