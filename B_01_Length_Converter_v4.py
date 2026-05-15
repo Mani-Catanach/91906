@@ -16,8 +16,9 @@ class Converter:
         Length converter GUI
         """
 
+        # create base states
         self.all_calculations_list = []
-
+        self.hist_open = False
 
         self.leng_frame = Frame(padx=10, pady=10)
         self.leng_frame.grid()
@@ -135,8 +136,9 @@ class Converter:
             answer = cr.to_metres(to_convert)
             answer_statement = f"{to_convert} cm is {answer} m"
 
-        # enable history export button as soon as we have a valid calculation
-        self.to_history_button.config(state=NORMAL)
+        # enable history export button as soon as we have a valid calculation and makes sure
+        if not self.hist_open:
+            self.to_history_button.config(state=NORMAL)
 
         self.answer_error.config(text=answer_statement)
         self.all_calculations_list.append(answer_statement)
@@ -245,6 +247,7 @@ class DisplayHistory:
 
         # diable history button
         partner.to_history_button.config(state=DISABLED)
+        partner.hist_open = True
 
         # If users press cross at top, closes history and
         # 'releases' history button
@@ -381,6 +384,7 @@ class DisplayHistory:
         Closes history dialogue box and enables history button
         """
         # Put history button back to normal
+        partner.hist_open = False
         partner.to_history_button.config(state=NORMAL)
         self.history_box.destroy()
 
