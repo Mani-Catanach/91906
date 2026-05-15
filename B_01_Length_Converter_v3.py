@@ -52,10 +52,10 @@ class Converter:
 
         # button list ( button text | bg colour | command | row | column)
         button_details_list = [
-            ["To Metres", "#FE00C4", lambda:self.check_leng(c.UNIT_METRES), 0, 0],
-            ["To Centimetres", "#BC88AC", lambda:self.check_leng(c.UNIT_CENTIMETRES), 0, 1],
-            ["Help / Info", "#d8b8ca", self.to_help, 1, 0],
-            ["History / Export", "#AE0062", self.to_history, 1, 1],
+            ["To Metres", "#990099", lambda:self.check_leng(c.UNIT_METRES), 0, 0],
+            ["To Centimetres", "#009900", lambda:self.check_leng(c.UNIT_CENTIMETRES), 0, 1],
+            ["Help / Info", "#CC6600", self.to_help, 1, 0],
+            ["History / Export", "#004C99", self.to_history, 1, 1],
         ]
 
         # List to hold button once they have been made
