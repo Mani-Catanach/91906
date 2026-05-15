@@ -1,5 +1,5 @@
 from tkinter import *
-from functools import partial # To prevent unwanted windows
+from functools import partial
 import all_constants as c
 from datetime import date
 import conversion_rounding as cr
@@ -16,9 +16,9 @@ class Converter:
         Length converter GUI
         """
 
-        # create base states
+        # create base states and set history tab tracker as false (closed)
         self.all_calculations_list = []
-        self.hist_open = False
+        self.hist_tab_open = False
 
         self.leng_frame = Frame(padx=10, pady=10)
         self.leng_frame.grid()
@@ -88,12 +88,12 @@ class Converter:
         # Retrieve length to be converted
         to_convert = self.leng_entry.get()
 
-        # Reset label and entry box (if we had an error
+        # Reset label and entry box (if we had an error)
         self.answer_error.config(fg="#004C99")
         self.leng_entry.config(bg="#ffffff")
 
         # check if there is a max length (i.e. max length !=0) and then check if input is between min and max length
-        # or greater than min length depending on if there is a max length
+        # or greater than min length depending on if there is a max length for correct checking and error messages
         try:
             # make sure user isn't inputting -0 before converting to float
             if float(to_convert) == 0 and to_convert.strip().startswith("-"):
@@ -137,7 +137,7 @@ class Converter:
             answer_statement = f"{to_convert} cm is {answer} m"
 
         # enable history export button as soon as we have a valid calculation and makes sure
-        if not self.hist_open:
+        if not self.hist_tab_open:
             self.to_history_button.config(state=NORMAL)
 
         self.answer_error.config(text=answer_statement)
@@ -161,7 +161,7 @@ class Converter:
 class DisplayHelp:
 
     def __init__(self, partner):
-        # setup dialogue box and background colour
+        # set up dialogue box and background colour
         background = "#456789"
         self.help_box = Toplevel()
 
@@ -173,6 +173,7 @@ class DisplayHelp:
         self.help_box.protocol("WM_DELETE_WINDOW",
                                partial(self.close_help, partner))
 
+        # makes help GUI and buttons
         self.help_frame = Frame(self.help_box, width=300,
                                 height=200)
         self.help_frame.grid()
@@ -182,6 +183,7 @@ class DisplayHelp:
                                       font=("Arial", 14, "bold"),)
         self.help_heading_label.grid(row=0)
 
+        # matches help notes to whether or not there's a maximum value
         if c.MAX_LENGTH != 0:
             help_bounds = ("Note that the maximum and minimum lengths "
                            f"are {c.MIN_LENGTH} and {c.MAX_LENGTH} respectively, "
@@ -193,6 +195,7 @@ class DisplayHelp:
                            "m and cm. If you try to convert a "
                            f"length that is less than {c.MIN_LENGTH}, ")
 
+        # text used for help tab
         help_text = ("To use the program, simply enter the length "
                      "you wish to convert and then choose to convert to "
                      "either metres or "
@@ -247,7 +250,10 @@ class DisplayHistory:
 
         # diable history button
         partner.to_history_button.config(state=DISABLED)
-        partner.hist_open = True
+        partner.hist_tab_open = True
+
+        # make calculation background colour
+        calc_back = "#3e58a3"
 
         # If users press cross at top, closes history and
         # 'releases' history button
@@ -259,10 +265,8 @@ class DisplayHistory:
 
         # background colour and text for calculation area
         if len(calculations_list) <= c.MAX_CALCS:
-            calc_back = "#3e58a3"
             calc_amount = "all your"
         else:
-            calc_back = "#3e58a3"
             calc_amount = (f"your recent calculations -"
                            f" showing {c.MAX_CALCS} / {len(calculations_list)}")
 
@@ -274,6 +278,7 @@ class DisplayHistory:
         newest_first_string = ""
         newest_first_list = list(reversed(calculations_list))
 
+        # decides on what message to give to user
         if len(newest_first_list) <= c.MAX_CALCS:
 
             for item in newest_first_list[:-1]:
@@ -384,7 +389,7 @@ class DisplayHistory:
         Closes history dialogue box and enables history button
         """
         # Put history button back to normal
-        partner.hist_open = False
+        partner.hist_tab_open = False
         partner.to_history_button.config(state=NORMAL)
         self.history_box.destroy()
 

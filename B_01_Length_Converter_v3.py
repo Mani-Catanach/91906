@@ -1,5 +1,5 @@
 from tkinter import *
-from functools import partial # To prevent unwanted windows
+from functools import partial
 import all_constants as c
 from datetime import date
 import conversion_rounding as cr
