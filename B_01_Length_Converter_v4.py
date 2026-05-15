@@ -257,11 +257,11 @@ class DisplayHistory:
         else:
             calc_back = "#3e58a3"
             calc_amount = (f"your recent calculations -"
-                           f"showing {c.MAX_CALCS} / {len(calculations_list)}")
+                           f" showing {c.MAX_CALCS} / {len(calculations_list)}")
 
         #strings for long labels
         recent_intro_txt = (f"Below are {calc_amount} calculations. "
-                     "All calculations are shown to up to 3 decimal places. ")
+                     "All calculations are shown to up to 4 decimal places. ")
 
         # create string from calculations list (newest calculations first)
         newest_first_string = ""
@@ -274,7 +274,7 @@ class DisplayHistory:
 
             newest_first_string += newest_first_list[-1]
 
-        #if we have more than 5 items
+        #if we have more than c.MAX_CALCS items
         else:
             for item in newest_first_list[:c.MAX_CALCS-1:]:
                 newest_first_string += item + "\n"
